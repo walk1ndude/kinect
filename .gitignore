@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # C++ objects and libs
 
 *.slo
@@ -26,3 +27,7 @@ Makefile*
 # QtCreator
 
 *.autosave
+=======
+*.kdev4
+*.pro.user.*
+>>>>>>> fb481e1f758942f5d9a396b881637484aff42b24
