@@ -4,8 +4,6 @@
 
 #include "freenectdev.h"
 
-//#include <libfreenect/libfreenect.h>
-
 int main(int argc, char * argv[]) {
 
     QGuiApplication app(argc, argv);

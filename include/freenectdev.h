@@ -15,7 +15,7 @@ typedef uint32_t u_int32_t;
 #include <QtCore/QMutex>
 #include <QtCore/QDebug>
 
-#include "include/libfreenect.hpp"
+#include <libfreenect/libfreenect.hpp>
 
 #include <opencv2/imgproc/imgproc.hpp>
 

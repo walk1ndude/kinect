@@ -36,7 +36,4 @@ win32 {
 SOURCES += src/main.cpp \
     src/freenectdev.cpp
 
-HEADERS += include/freenectdev.h \
-    include/libfreenect.hpp \
-    include/libfreenect.h
-
+HEADERS += include/freenectdev.h
