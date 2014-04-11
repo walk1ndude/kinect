@@ -62,45 +62,40 @@ void FreenectDev::DepthCallback(void * depth, u_int32_t timestamp) {
     _depthMutex.unlock();
 }
 
-bool FreenectDev::getVideo(cv::Mat & output) {
+void FreenectDev::showVideo() {
     _rgbMutex.lock();
 
-    if(_newRgbFrame) {
-        cv::cvtColor(_rgbMat, output, CV_RGB2BGR);
+    if (_newRgbFrame) {
         _newRgbFrame = false;
 
         cv::imshow(WINDOW_RGB, _rgbMat);
         cv::waitKey(1);
+    }
 
-        _rgbMutex.unlock();
-        return true;
-    }
-    else {
-        _rgbMutex.unlock();
-        return false;
-    }
+    _rgbMutex.unlock();
 }
 
-bool FreenectDev::getDepth(cv::Mat & output) {
+void FreenectDev::showDepth() {
     _depthMutex.lock();
 
-    if(_newRgbFrame) {
-        cv::cvtColor(_depthMat, output, CV_RGB2BGR);
+    if (_newRgbFrame) {
         _newDepthFrame = false;
 
         cv::imshow(WINDOW_DEPTH, _depthMat);
         cv::waitKey(1);
+    }
 
-        _depthMutex.unlock();
-        return true;
-    }
-    else {
-        _depthMutex.unlock();
-        return false;
-    }
+    _depthMutex.unlock();
 }
 
 void FreenectDev::start() {
+    _timer = new QTimer;
+
+    QObject::connect(_timer, &QTimer::timeout, this, &FreenectDev::showVideo);
+    QObject::connect(_timer, &QTimer::timeout, this, &FreenectDev::showDepth);
+
+    _timer->start(30);
+
     startVideo();
     startDepth();
 }

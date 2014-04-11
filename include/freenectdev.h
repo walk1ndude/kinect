@@ -14,6 +14,7 @@ typedef uint32_t u_int32_t;
 #include <QtCore/QObject>
 #include <QtCore/QMutex>
 #include <QtCore/QDebug>
+#include <QtCore/QTimer>
 
 #include <libfreenect/libfreenect.hpp>
 
@@ -31,8 +32,8 @@ public:
     void VideoCallback(void * rgb, u_int32_t timestamp);
     void DepthCallback(void * depth, u_int32_t timestamp);
 
-    bool getVideo(cv::Mat & output);
-    bool getDepth(cv::Mat & output);
+    void showVideo();
+    void showDepth();
 
     void start();
     void stop();
@@ -40,6 +41,8 @@ public:
 private:
     QMutex _rgbMutex;
     QMutex _depthMutex;
+
+    QTimer * _timer;
 
     std::vector<u_int8_t> _bufferRgb;
     std::vector<u_int8_t> _bufferDepth;
