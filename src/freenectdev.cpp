@@ -49,9 +49,6 @@ void FreenectDev::VideoCallback(void * rgb, u_int32_t timestamp) {
     _newRgbFrame = true;
 
     _rgbMutex.unlock();
-
-    cv::imshow(WINDOW_RGB, _rgbMat);
-    cv::waitKey(1);
 }
 
 void FreenectDev::DepthCallback(void * depth, u_int32_t timestamp) {
@@ -63,9 +60,6 @@ void FreenectDev::DepthCallback(void * depth, u_int32_t timestamp) {
     _newDepthFrame = true;
 
     _depthMutex.unlock();
-
-    cv::imshow(WINDOW_DEPTH, _depthMat);
-    cv::waitKey(1);
 }
 
 bool FreenectDev::getVideo(cv::Mat & output) {
@@ -74,6 +68,10 @@ bool FreenectDev::getVideo(cv::Mat & output) {
     if(_newRgbFrame) {
         cv::cvtColor(_rgbMat, output, CV_RGB2BGR);
         _newRgbFrame = false;
+
+        cv::imshow(WINDOW_RGB, _rgbMat);
+        cv::waitKey(1);
+
         _rgbMutex.unlock();
         return true;
     }
@@ -89,6 +87,10 @@ bool FreenectDev::getDepth(cv::Mat & output) {
     if(_newRgbFrame) {
         cv::cvtColor(_depthMat, output, CV_RGB2BGR);
         _newDepthFrame = false;
+
+        cv::imshow(WINDOW_DEPTH, _depthMat);
+        cv::waitKey(1);
+
         _depthMutex.unlock();
         return true;
     }
