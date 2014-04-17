@@ -9,7 +9,7 @@ INCLUDEPATH += include
 
 unix {
     CONFIG += link_pkgconfig
-    PKGCONFIG += opencv libfreenect
+    PKGCONFIG += opencv
 }
 
 win32 {
@@ -33,7 +33,11 @@ win32 {
             -lopencv_ocl248
 }
 
+LIBS += /usr/lib/libfreenect.so.0.4
+
 SOURCES += src/main.cpp \
     src/freenectdev.cpp
 
-HEADERS += include/freenectdev.h
+HEADERS += include/freenectdev.h \
+           include/libfreenect.hpp \
+           include/libfreenect.h

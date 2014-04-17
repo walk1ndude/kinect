@@ -16,7 +16,9 @@ typedef uint32_t u_int32_t;
 #include <QtCore/QDebug>
 #include <QtCore/QTimer>
 
-#include <libfreenect/libfreenect.hpp>
+//#include <libfreenect/libfreenect.hpp>
+
+#include "libfreenect.hpp"
 
 #include <opencv2/imgproc/imgproc.hpp>
 
@@ -42,7 +44,8 @@ private:
     QMutex _rgbMutex;
     QMutex _depthMutex;
 
-    QTimer * _timer;
+    QTimer * _timerVideo;
+    QTimer * _timerDepth;
 
     std::vector<u_int8_t> _bufferRgb;
     std::vector<u_int8_t> _bufferDepth;
@@ -50,7 +53,7 @@ private:
 
     cv::Mat _rgbMat;
     cv::Mat _depthMat;
-    cv::Mat _ownMat;
+    cv::Mat _depthMat8;
 
     bool _newDepthFrame;
     bool _newRgbFrame;
